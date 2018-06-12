@@ -114,8 +114,9 @@ var parseJSON = function parseJSON(xhr, e) {
     }
 };
 
+/*
 //this just clears all the fields back to their original setting
-var resetFields = function resetFields() {
+const resetFields = () => {
     document.querySelector("#name").value = '';
     document.querySelector("#race").value = '';
     document.querySelector("#class").value = '';
@@ -145,17 +146,19 @@ var resetFields = function resetFields() {
     document.getElementById("perception").checked = false;
     document.getElementById("investigation").checked = false;
 
+
     document.querySelector("#alignment").value = '';
     document.querySelector("#background").value = '';
     document.querySelector("#playerName").value = '';
     document.querySelector("#armor").value = '';
     document.querySelector("#health").value = '';
-    var equiplist = document.querySelector("#equipment");
+    const equiplist = document.querySelector("#equipment");
     while (equiplist.firstChild) {
         equiplist.removeChild(equiplist.firstChild);
     }
     document.querySelector("#addEquipment").value = '';
 };
+*/
 
 //will show a modal with the message from the response
 var handleResponse = function handleResponse(xhr, parseResponse, e) {
@@ -276,28 +279,28 @@ var sendDelete = function sendDelete(e, deleteForm) {
     e.preventDefault();
     return false;
 };
-
+/*
 //this is for making the equipment list
 //it will add an input and button to a div, which then appends to
 //the list element, which goes into the list
 function addEquipmentName(name) {
-    var equiplist = document.querySelector("#equipment");
-    var listel = document.createElement("li");
+    const equiplist = document.querySelector("#equipment");
+    let listel = document.createElement("li");
     listel.className = "list-group-item flex";
     //listel.textContent = document.querySelector("#addEquipment").value;
-    var input = document.createElement("input");
+    let input = document.createElement("input");
     input.type = "text";
     input.name = "equipment";
-    input.value = name;
-    input.textContent = name;
+    input.value= name;
+    input.textContent=name;
     //listel.appendChild(input);
-    var button = document.createElement("button");
+    let button = document.createElement("button");
     button.className = "btn btn-xs btn-danger";
     button.innerHTML = "<i class='material-icons'>clear</i>";
-    button.onclick = function () {
+    button.onclick = () => {
         equiplist.removeChild(listel);
-    };
-    var div = document.createElement("div");
+    }
+    let div = document.createElement("div");
     div.className = "input-group-prepend col";
     div.appendChild(input);
     div.appendChild(button);
@@ -305,36 +308,25 @@ function addEquipmentName(name) {
     listel.appendChild(div);
     equiplist.appendChild(listel);
 }
+*/
 var init = function init() {
 
-    var characterForm = document.querySelector("#refreshCharacterListForm");
-    var getCharacterList = function getCharacterList(e) {
-        return requestUpdate(e, characterForm);
-    };
+    /*const characterForm = document.querySelector("#refreshCharacterListForm");
+    const getCharacterList = (e) => requestUpdate(e, characterForm);
     characterForm.addEventListener('submit', getCharacterList);
-
-    var nameForm = document.querySelector("#nameForm");
-    var addCharacter = function addCharacter(e) {
-        return sendPost(e, nameForm);
-    };
+     const nameForm = document.querySelector("#nameForm");
+    const addCharacter = (e) => sendPost(e,nameForm);
     nameForm.addEventListener('submit', addCharacter);
-
-    var saveForm = document.querySelector("#saveCharacter");
-    var saveCharacter = function saveCharacter(e) {
-        return sendPost(e, saveForm);
-    };
+     const saveForm = document.querySelector("#saveCharacter");
+    const saveCharacter = (e) => sendPost(e,saveForm);
     saveForm.addEventListener('submit', saveCharacter);
-
-    var deleteForm = document.querySelector("#deleteCharacter");
-    var deleteCharacter = function deleteCharacter(e) {
-        return sendDelete(e, deleteForm);
-    };
+     const deleteForm = document.querySelector("#deleteCharacter");
+    const deleteCharacter = (e) => sendDelete(e, deleteForm);
     deleteForm.addEventListener('submit', deleteCharacter);
-
-    var equipButton = document.querySelector("#addEquipmentButton");
-    var addEquip = function addEquip() {
+     const equipButton = document.querySelector("#addEquipmentButton");
+    const addEquip =()=> {
         addEquipmentName(document.querySelector("#addEquipment").value);
-        /*const equiplist = document.querySelector("#equipment");
+        const equiplist = document.querySelector("#equipment");
         let listel = document.createElement("li");
         listel.className = "list-group-item flex";
         //listel.textContent = document.querySelector("#addEquipment").value;
@@ -351,39 +343,17 @@ var init = function init() {
             equiplist.removeChild(listel);
         }
         listel.appendChild(button);
-        equiplist.appendChild(listel);*/
+        equiplist.appendChild(listel);
         document.querySelector("#addEquipment").value = '';
     };
     equipButton.addEventListener('click', addEquip);
-
-    var dropdownInputs = document.querySelectorAll(".dropdownInput");
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
-
-    try {
-        for (var _iterator = dropdownInputs[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-            var dropdown = _step.value;
-
-            dropdown.onclick = function (e) {
-                var dropdowninputtarget = document.querySelector(e.target.getAttribute("target"));
-                dropdowninputtarget.value = e.target.value;
-            };
-        }
-    } catch (err) {
-        _didIteratorError = true;
-        _iteratorError = err;
-    } finally {
-        try {
-            if (!_iteratorNormalCompletion && _iterator.return) {
-                _iterator.return();
-            }
-        } finally {
-            if (_didIteratorError) {
-                throw _iteratorError;
-            }
-        }
-    }
+     const dropdownInputs = document.querySelectorAll(".dropdownInput");
+    for(var dropdown of dropdownInputs) {
+        dropdown.onclick = (e) => {
+            const dropdowninputtarget = document.querySelector(e.target.getAttribute("target"));
+            dropdowninputtarget.value = e.target.value;
+        };
+    }*/
 };
 
 window.onload = init;

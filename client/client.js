@@ -104,6 +104,7 @@ const parseJSON = (xhr,e) => {
     }
 };
 
+/*
 //this just clears all the fields back to their original setting
 const resetFields = () => {
     document.querySelector("#name").value = '';
@@ -147,6 +148,7 @@ const resetFields = () => {
     }
     document.querySelector("#addEquipment").value = '';
 };
+*/
 
 //will show a modal with the message from the response
 const handleResponse = (xhr, parseResponse, e) => {
@@ -261,7 +263,7 @@ const sendDelete = (e, deleteForm) => {
     e.preventDefault();
     return false;
 }
-
+/*
 //this is for making the equipment list
 //it will add an input and button to a div, which then appends to
 //the list element, which goes into the list
@@ -290,9 +292,10 @@ function addEquipmentName(name) {
     listel.appendChild(div);
     equiplist.appendChild(listel);
 }
+*/
 const init = () => {
 
-    const characterForm = document.querySelector("#refreshCharacterListForm");
+    /*const characterForm = document.querySelector("#refreshCharacterListForm");
     const getCharacterList = (e) => requestUpdate(e, characterForm);
     characterForm.addEventListener('submit', getCharacterList);
 
@@ -311,7 +314,7 @@ const init = () => {
     const equipButton = document.querySelector("#addEquipmentButton");
     const addEquip =()=> {
         addEquipmentName(document.querySelector("#addEquipment").value);
-        /*const equiplist = document.querySelector("#equipment");
+        const equiplist = document.querySelector("#equipment");
         let listel = document.createElement("li");
         listel.className = "list-group-item flex";
         //listel.textContent = document.querySelector("#addEquipment").value;
@@ -328,7 +331,7 @@ const init = () => {
             equiplist.removeChild(listel);
         }
         listel.appendChild(button);
-        equiplist.appendChild(listel);*/
+        equiplist.appendChild(listel);
         document.querySelector("#addEquipment").value = '';
     };
     equipButton.addEventListener('click', addEquip);
@@ -339,7 +342,7 @@ const init = () => {
             const dropdowninputtarget = document.querySelector(e.target.getAttribute("target"));
             dropdowninputtarget.value = e.target.value;
         };
-    }
+    }*/
 };
 
 window.onload = init;
