@@ -1,0 +1,91 @@
+<html lang="en">
+    <head>
+        <meta charset="utf-8"/>
+        <title>BookmarkMaker</title>
+        <script crossorigin src="https://unpkg.com/react@15/dist/react.min.js"></script>
+        <script crossorigin src="https://unpkg.com/react-dom@15/dist/react-dom.min.js"></script>
+        <script crossorigin src="https://unpkg.com/prop-types/prop-types.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/babel-core/5.8.34/browser.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/remarkable/1.6.2/remarkable.min.js"></script>
+
+        <!--bootstrap include-->
+        <!--        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>-->
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+
+        <link rel="shortcut icon" href="/assets/img/favicon.png"/>
+        <!--bootstrap include-->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
+
+        <link rel="stylesheet" type="text/css" href="/assets/style.css"/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+              rel="stylesheet">
+    </head>
+    <style id="style"></style>
+    <body class="darkMode">
+        <div class="container-fluid fixed-top">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="navbar bg-primary">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <a href="/login"><img id="logo" src="/assets/img/face.png" alt="face logo"/></a>
+
+                                <a id="backToAppButton" href="/maker"><div class="btn btn-secondary text-light ml-sm-2 align-middle">Back to app</div></a>
+                                <a id="backToAccountButton" href="/account"><div class="btn btn-secondary text-light ml-sm-2 align-middle">Back to account</div></a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-12">
+                    <nav class="navbar bg-primary">
+                        <div class="container-fluid">
+                            <div class="row">
+                                <a href="/login"><img src="/assets/img/face.png" alt="face logo"/></a>
+
+                                <a href="/maker"><div class="btn btn-secondary text-light ml-sm-2 align-middle">Back to app</div></a>
+                                <a href="/account"><div class="btn btn-secondary text-light ml-sm-2 align-middle">Back to account</div></a>
+                            </div>
+                        </div>
+                    </nav>
+                </div>
+            </div>
+        </div>
+
+        <div id="pricingContent">
+
+        </div>
+        <!--<div class="container-fluid">
+<div class="row">
+<div class="col-3 bg-primary" id="accountSideBar">
+
+</div>
+<section class="col-9" id="accountContent" >
+</section>
+
+<div class="modal fade" id="bookmarkMessage" tabindex="-1" role="dialog" aria-labelledby="updateModalModalLabel" aria-hidden="true">
+<div class="modal-dialog" role="document">
+<div class="modal-content">
+<div class="modal-header">
+<h4><span id="errorMessage" class="modal-title"></span></h4>
+<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<span aria-hidden="true">&times;</span>
+</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>-->
+        <script src="/assets/pricingBundle.js"></script>
+    </body>
+</html>
+
+
