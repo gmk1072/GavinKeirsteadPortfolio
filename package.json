@@ -1,7 +1,7 @@
 {
-    "name": "430-Project1",
+    "name": "gavin-keirstead-portfolio-website",
     "version": "1.0.0",
-    "description": "430-Project1",
+    "description": "Gavin Keirstead Portfolio Website",
     "main": "./src/server.js",
     "scripts": {
         "start": "node ./src/server.js",
@@ -13,14 +13,14 @@
     },
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/gmk1072/430project1.git"
+        "url": "git+https://github.com/gmk1072/GavinKeirsteadPortfolio.git"
     },
     "author": "Gavin Keirstead",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/gmk1072/430project1/issues"
+        "url": "https://github.com/gmk1072/GavinKeirsteadPortfolio/issues"
     },
-    "homepage": "https://github.com/gmk1072/430project1#readme",
+    "homepage": "https://github.com/gmk1072/GavinKeirsteadPortfolio#readme",
     "devDependencies": {
         "babel-cli": "^6.26.0",
         "babel-preset-env": "^1.6.1",
