@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>DnD Character Storage</title>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="/style.css">
+        <style>
+            .margin3px {
+                margin: 3px;
+            }
+        </style>
+        <script src="./bundle.js"></script>
+    </head>
+    <body>
+        <nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0">
+            <div class="navbar-brand col-sm-3 col-d-2 mr-0">D&D Character Storage</div>
+            <ul class="navbar-nav px-3"><li class="nav-item text-nowrap" > <div class="nav-link" id="statusCode"></div></li></ul>
+        </nav>
+        <div class="container-fluid border-primary">
+            <div class="row">
+                <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+                    <div class="sidebar-sticky">
+                        <ul class="nav flex-column margin3px">
+                            <li class="nav-item"><button class="btn btn-dark btn-sm" data-toggle="collapse" href="#addCharacterCollapse" role="button" aria-expanded="false" aria-controls="addCharacterCollapse">Add a Character</button></li>
+                            <div class="row">
+                                <div class="col">
+                                    <div class="collapse" id="addCharacterCollapse">
+                                        <div class="card card-body">
+                                            <form id="nameForm" action="/addCharacter" method="post">
+                                                <div class="form-group">
+                                                    <label for="characterName">Enter a name for you character</label>
+                                                    <input type="text" class="form-control" name="name" id="nameField" aria-describedby="characterName" placeholder="Ex:John Smith">
+                                                    <button type="submit" class="btn btn-dark" data-toggle="collapse" data-target="#addCharacterCollapse" aria-expanded="false" aria-controls="addCharacterCollapse" value="Add Character" id="addCharacterButton">Submit</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </ul>
+                        <form id="refreshCharacterListForm" action="/getCharacterList" method="get">
+                            <div class="input-group-prepend">
+                                <h6 class="sidebar-heading input-group-text">Character List</h6>
+                                <button class="btn btn-dark btn-xs" id="urlField" type="submit"><i class="material-icons">refresh</i></button>
+                            </div>
+                        </form>
+                        <ul class="nav flex-column mb-2" id="characterList">
+                        </ul>
+                    </div>
+                </nav>
+
+
+                <div id="statusModal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="statusNotification" aria-hidden="true">
+                    <div class="modal-dialog modal-dialog-centered modal-sm">
+                        <div class="modal-content">
+                            <label id="statusContent" class="modal-body">
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <main role="main" class="col-md-9 ml-sm-auto col-lg-10 pt-3 px-4" id="main">
+                    <form id="saveCharacter" action="/saveCharacter" method="post">
+                        <div class="container">
+                            <div class="row">
+                                <div class="input-group-prepend col-4">
+                                    <span class="input-group-text text-light bg-dark col-3">
+                                        Name
+                                    </span>
+                                    <input id="name" type="text" class="form-control col-9" name="name" aria-describedby="characterName" readonly>
+                                </div>
+                                <div class="input-group-prepend col-4">
+                                    <button class="btn dropdown-toggle btn-dark" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Race</button>
+                                    <div class="dropdown-menu">
+                                        <button class="dropdown-item dropdownInput" target="#race" value="Aarakocra" type="button">Aarakocra</button>
+                                        <button class="dropdown-item dropdownInput" target="#race" value="Aasimar" type="button">Aasimar</button>
+                                        <button class="dropdown-item dropdownInput" target="#race" value="Bugbear" type="button">Bugbear</button>
+                                        <button class="dropdown-item dropdownInput" target="#race" value="Dragonborn" type="button">Dragonborn</button>
+                                        <button class="dropdown-item dropdownInput" target="#race" value="Dwarf" type="button">Dwarf</button>
+                                        <button class="dropdown-item dropdownInput" target="#race" value="Elf" type="button">Elf</button>
+                                        <button class="dropdown-item dropdownInput" target="#race" value="Feral Tiefling" type="button">Feral Tiefling</button>
+                                        <button class="dropdown-item dropdownInput" target="#race" value="Firbolg" type="button">Firbolg</button>
+                                        <button class="dropdown-item dropdownInput" target="#race" value="Genasi" type="button">Genasi</button>
+                                        <button class="dropdown-item dropdownInput" target="#race" value="Gnome" type="button">Gnome</button>
+                                        <button class="dropdown-item dropdownInput" target="#race" value="Goblin" type="button">Goblin</button>
+                                        <button class="dropdown-item dropdownInput" target="#race" value="Goliath" type="button">Goliath</button>
+                                        <button class="dropdown-item dropdownInput" target="#race" value="Half-Elf" type="button">Half-Elf</button>
+                                        <button class="dropdown-item dropdownInput" target="#race" value="Halfling" type="button">Halfling</button>
+                                        <button class="dropdown-item dropdownInput" target="#race" value="Half-Orc" type="button">Half-Orc</button>
+                                        <button class="dropdown-item dropdownInput" target="#race" value="Hobgoblin" type="button">Hobgoblin</button>
+                                        <button class="dropdown-item dropdownInput" target="#race" value="Human" type="button">Human</button>
+                                        <button class="dropdown-item dropdownInput" target="#race" value="Kenku" type="button">Kenku</button>
+                                        <button class="dropdown-item dropdownInput" target="#race" value="Kobold" type="button">Kobold</button>
+                                        <button class="dropdown-item dropdownInput" target="#race" value="Lizardfolk" type="button">Lizardfolk</button>
+                                        <button class="dropdown-item dropdownInput" target="#race" value="Orc" type="button">Orc</button>
+                                        <button class="dropdown-item dropdownInput" target="#race" value="Tabaxi" type="button">Tabaxi</button>
+                                        <button class="dropdown-item dropdownInput" target="#race" value="Tiefling" type="button">Tiefling</button>
+                                        <button class="dropdown-item dropdownInput" target="#race" value="Tortle" type="button">Tortle</button>
+                                        <button class="dropdown-item dropdownInput" target="#race" value="Triton" type="button">Triton</button>
+                                        <button class="dropdown-item dropdownInput" target="#race" value="Yuan-ti Pureblood" type="button">Yuan-ti Pureblood</button>
+                                    </div>
+                                    <input id="race" type="text" class="form-control" name="race" aria-describedby="characterRace">
+                                </div>
+                                <div class="input-group-prepend col-4">
+                                    <button class="btn dropdown-toggle btn-dark" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Class</button>
+                                    <div class="dropdown-menu">
+                                        <button class="dropdown-item dropdownInput" target="#class" value="Barbarian" type="button">Barbarian</button>
+                                        <button class="dropdown-item dropdownInput" target="#class" value="Bard" type="button">Bard</button>
+                                        <button class="dropdown-item dropdownInput" target="#class" value="Cleric" type="button">Cleric</button>
+                                        <button class="dropdown-item dropdownInput" target="#class" value="Druid" type="button">Druid</button>
+                                        <button class="dropdown-item dropdownInput" target="#class" value="Fighter" type="button">Fighter</button>
+                                        <button class="dropdown-item dropdownInput" target="#class" value="Monk" type="button">Monk</button>
+                                        <button class="dropdown-item dropdownInput" target="#class" value="Paladin" type="button">Paladin</button>
+                                        <button class="dropdown-item dropdownInput" target="#class" value="Ranger" type="button">Ranger</button>
+                                        <button class="dropdown-item dropdownInput" target="#class" value="Rogue" type="button">Rogue</button>
+                                        <button class="dropdown-item dropdownInput" target="#class" value="Sorcerer" type="button">Sorcerer</button>
+                                        <button class="dropdown-item dropdownInput" target="#class" value="Warlock" type="button">Warlock</button>
+                                        <button class="dropdown-item dropdownInput" target="#class" value="Wizard" type="button">Wizard</button>
+                                        <button class="dropdown-item dropdownInput" target="#class" value="Blood Hunter" type="button">Blood Hunter</button>
+                                    </div>
+                                    <input id="class" type="text" class="form-control" name="class" aria-describedby="characterClass">
+                                </div>
+                                <div class="container">
+                                    <div class="row">
+                                        <div class="input-group-prepend col-4">
+                                            <span class="input-group-text text-light bg-dark col-4">
+                                                Player Name
+                                            </span>
+                                            <input id="playerName" type="text" class="form-control col-8" name="playerName" aria-describedby="playerName">
+                                        </div>
+                                        <div class"col-8"></div>
+                                    </div>
+                                </div>
+                                <div class="container"><div class="row"><br></div></div>
+                                <div class="container col-4">
+                                    <div class="row">
+                                        <div class="input-group-prepend col-6">
+                                            <span class="input-group-text text-light bg-dark col-6">
+                                                STR
+                                            </span>
+                                            <input id="str" type="text" class="form-control" name="str" aria-describedby="characterStr">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-group-prepend col-6">
+                                            <span class="input-group-text text-light bg-dark col-6">
+                                                DEX
+                                            </span>
+                                            <input id="dex" type="text" class="form-control" name="dex" aria-describedby="characterDex">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-group-prepend col-6">
+                                            <span class="input-group-text text-light bg-dark col-6">
+                                                CON
+                                            </span>
+                                            <input id="con" type="text" class="form-control" name="con" aria-describedby="characterCon">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-group-prepend col-6">
+                                            <span class="input-group-text text-light bg-dark col-6">
+                                                INT
+                                            </span>
+                                            <input id="int" type="text" class="form-control" name="int" aria-describedby="characterInt">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-group-prepend col-6">
+                                            <span class="input-group-text text-light bg-dark col-6">
+                                                WIS
+                                            </span>
+                                            <input id="wis" type="text" class="form-control" name="wis" aria-describedby="characterWis">
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="input-group-prepend col-6">
+                                            <span class="input-group-text text-light bg-dark col-6">
+                                                CHA
+                                            </span>
+                                            <input id="cha" type="text" class="form-control" name="cha" aria-describedby="characterCha">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container col-4">
+                                    <div class="row">
+                                        <div class="input-group-prepend">
+                                        <h6 class="input-group-prepend">Skill Proficiencies</h6>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-check col">
+                                            <input type="checkbox" class="form-check-input skillProf" name="acrobatics" id="acrobatics" >
+                                            <label class="form-check-label" for="acrobatics">Acrobatics</label>
+                                        </div>
+                                        <div class="form-check col">
+                                            <input type="checkbox" class="form-check-input skillProf" name="animalHandling" id="animalHandling">
+                                            <label class="form-check-label" for="animalHandling">Animal Handling</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-check col">
+                                            <input type="checkbox" class="form-check-input skillProf" name="arcana" id="arcana">
+                                            <label class="form-check-label" for="arcana">Arcana</label>
+                                        </div>
+                                        <div class="form-check col">
+                                            <input type="checkbox" class="form-check-input skillProf" name="athletics" id="athletics">
+                                            <label class="form-check-label" for="athletics">Athletics</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-check col">
+                                            <input type="checkbox" class="form-check-input skillProf" name="deception" id="deception">
+                                            <label class="form-check-label" for="deception">Deception</label>
+                                        </div>
+                                        <div class="form-check col">
+                                            <input type="checkbox" class="form-check-input skillProf" name="history" id="history">
+                                            <label class="form-check-label" for="history">History</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-check col">
+                                            <input type="checkbox" class="form-check-input skillProf" name="insight" id="insight">
+                                            <label class="form-check-label" for="insight">Insight</label>
+                                        </div>
+                                        <div class="form-check col">
+                                            <input type="checkbox" class="form-check-input skillProf" name="intimidation" id="intimidation">
+                                            <label class="form-check-label" for="intimidation">Intimidation</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-check col">
+                                            <input type="checkbox" class="form-check-input skillProf" name="nature" id="nature">
+                                            <label class="form-check-label" for="nature">Nature</label>
+                                        </div>
+                                        <div class="form-check col">
+                                            <input type="checkbox" class="form-check-input skillProf" name="performance" id="performance">
+                                            <label class="form-check-label" for="performance">Performance</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-check col">
+                                            <input type="checkbox" class="form-check-input skillProf" name="persuasion" id="persuasion">
+                                            <label class="form-check-label" for="persuasion">Persuasion</label>
+                                        </div>
+                                        <div class="form-check col">
+                                            <input type="checkbox" class="form-check-input skillProf" name="religion" id="religion">
+                                            <label class="form-check-label" for="religion">Religion</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-check col">
+                                            <input type="checkbox" class="form-check-input skillProf" name="stealth" id="stealth">
+                                            <label class="form-check-label" for="stealth">Stealth</label>
+                                        </div>
+                                        <div class="form-check col">
+                                            <input type="checkbox" class="form-check-input skillProf" name="survival" id="survival">
+                                            <label class="form-check-label" for="survival">Survival</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-check col">
+                                            <input type="checkbox" class="form-check-input skillProf" name="sleightOfHand" id="sleightOfHand">
+                                            <label class="form-check-label" for="sleightOfHand">Sleight Of Hand</label>
+                                        </div>
+                                        <div class="form-check col">
+                                            <input type="checkbox" class="form-check-input skillProf" name="medicine" id="medicine">
+                                            <label class="form-check-label" for="medicine">Medicine</label>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-check col">
+                                            <input type="checkbox" class="form-check-input skillProf" name="perception" id="perception">
+                                            <label class="form-check-label" for="perception">Perception</label>
+                                        </div>
+                                        <div class="form-check col">
+                                            <input type="checkbox" class="form-check-input skillProf" name="investigation" id="investigation">
+                                            <label class="form-check-label" for="investigation">Investigation</label>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="container col-4">
+                                    <div class="row">
+                                        <button class="btn dropdown-toggle btn-dark col-4" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Alignment</button>
+                                        <div class="dropdown-menu">
+                                            <button class="dropdown-item dropdownInput" target="#alignment" value="Lawful Good" type="button">Lawful Good</button>
+                                            <button class="dropdown-item dropdownInput" target="#alignment" value="Neutral Good" type="button">Neutral Good</button>
+                                            <button class="dropdown-item dropdownInput" target="#alignment" value="Chaotic Good" type="button">Chaotic Good</button>
+                                            <button class="dropdown-item dropdownInput" target="#alignment" value="Lawful Neutral" type="button">Lawful Neutral</button>
+                                            <button class="dropdown-item dropdownInput" target="#alignment" value="Neutral" type="button">Neutral</button>
+                                            <button class="dropdown-item dropdownInput" target="#alignment" value="Chaotic Neutral" type="button">Chaotic Neutral</button>
+                                            <button class="dropdown-item dropdownInput" target="#alignment" value="Lawful Evil" type="button">Lawful Evil</button>
+                                            <button class="dropdown-item dropdownInput" target="#alignment" value="Neutral Evil" type="button">Neutral Evil</button>
+                                            <button class="dropdown-item dropdownInput" target="#alignment" value="Chaotic Evil" type="button">Chaotic Evil</button>
+                                        </div>
+                                        <input id="alignment" type="text" class="form-control col-8" name="alignment" aria-describedby="characterAlignment" readonly>
+                                    </div>
+                                    <div class="container"><div class="row"><br></div></div>
+                                    <div class="row">
+                                        <button class="btn dropdown-toggle btn-dark col-4" type="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Background</button>
+                                        <div class="dropdown-menu">
+                                            <button class="dropdown-item dropdownInput" target="#background" value="Acolyte" type="button">Acolyte</button>
+                                            <button class="dropdown-item dropdownInput" target="#background" value="Anthropologist" type="button">Anthropologist</button>
+                                            <button class="dropdown-item dropdownInput" target="#background" value="Archaeologist" type="button">Archaeologist</button>
+                                            <button class="dropdown-item dropdownInput" target="#background" value="Charlatan" type="button">Charlatan</button>
+                                            <button class="dropdown-item dropdownInput" target="#background" value="City Watch" type="button">City Watch</button>
+                                            <button class="dropdown-item dropdownInput" target="#background" value="Clan Crafter" type="button">Clan Crafter</button>
+                                            <button class="dropdown-item dropdownInput" target="#background" value="Cloistered Scholar" type="button">Cloistered Scholar</button>
+                                            <button class="dropdown-item dropdownInput" target="#background" value="Courtier" type="button">Courtier</button>
+                                            <button class="dropdown-item dropdownInput" target="#background" value="Criminal" type="button">Criminal</button>
+                                            <button class="dropdown-item dropdownInput" target="#background" value="Entertainer" type="button">Entertainer</button>
+                                            <button class="dropdown-item dropdownInput" target="#background" value="Faction Agent" type="button">Faction Agent</button>
+                                            <button class="dropdown-item dropdownInput" target="#background" value="Far Traveler" type="button">Far Traveler</button>
+                                            <button class="dropdown-item dropdownInput" target="#background" value="Gladiator" type="button">Gladiator</button>
+                                            <button class="dropdown-item dropdownInput" target="#background" value="Guild Artisan" type="button">Guild Artisan</button>
+                                            <button class="dropdown-item dropdownInput" target="#background" value="Haunted One" type="button">Haunted One</button>
+                                            <button class="dropdown-item dropdownInput" target="#background" value="Hermit" type="button">Hermit</button>
+                                            <button class="dropdown-item dropdownInput" target="#background" value="Inheritor" type="button">Inheritor</button>
+                                            <button class="dropdown-item dropdownInput" target="#background" value="Knight" type="button">Knight</button>
+                                            <button class="dropdown-item dropdownInput" target="#background" value="Knight of the Order" type="button">Knight of the Order</button>
+                                            <button class="dropdown-item dropdownInput" target="#background" value="Mercenary Veteran" type="button">Mercenary Veteran</button>
+                                            <button class="dropdown-item dropdownInput" target="#background" value="Noble" type="button">Noble</button>
+                                            <button class="dropdown-item dropdownInput" target="#background" value="Outlander" type="button">Outlander</button>
+                                            <button class="dropdown-item dropdownInput" target="#background" value="Pirate" type="button">Pirate</button>
+                                            <button class="dropdown-item dropdownInput" target="#background" value="Sage" type="button">Sage</button>
+                                            <button class="dropdown-item dropdownInput" target="#background" value="Sailor" type="button">Sailor</button>
+                                            <button class="dropdown-item dropdownInput" target="#background" value="Soldier" type="button">Soldier</button>
+                                            <button class="dropdown-item dropdownInput" target="#background" value="Urban Bounty Hunter" type="button">Urban Bounty Hunter</button>
+                                            <button class="dropdown-item dropdownInput" target="#background" value="Urchin" type="button">Urchin</button>
+                                            <button class="dropdown-item dropdownInput" target="#background" value="Uthgardt Tribe Member" type="button">Uthgardt Tribe Member</button>
+                                            <button class="dropdown-item dropdownInput" target="#background" value="Waterdhavian Noble" type="button">Waterdhavian Noble</button>
+                                        </div>
+                                        <input id="background" type="text" class="form-control col-8" name="background" aria-describedby="characterBackground">
+                                    </div>
+                                    <div class="container"><div class="row"><br></div></div>
+                                    <div class="row">
+                                        <div class="input-group-prepend col-6">
+                                            <span class="input-group-text text-light bg-dark col-6">
+                                                Armor
+                                            </span>
+                                            <input id="armor" type="text" class="form-control" name="armor" aria-describedby="characterArmor">
+                                        </div>
+                                        <div class="input-group-prepend col-6">
+                                            <span class="input-group-text text-light bg-dark col-6">
+                                                Health
+                                            </span>
+                                            <input id="health" type="text" class="form-control" name="health" aria-describedby="characterHealth">
+                                        </div>
+                                    </div>
+                                    <div class="container"><div class="row"><br></div></div>
+                                    <!--<div class="row">
+<div class="col">
+<div class="input-group-prepend col">
+<span class="input-group-text col">
+Add Equipment
+</span>
+<input id="addEquipment" type="text" class="form-control" name="addEquipment" aria-describedby="addEquipment">
+<button type="button" class="btn btn-xs btn-success" id="addEquipmentButton"><i class='material-icons'>add</i></button>
+</div>
+</div>
+</div>-->
+
+                                    <div class="container"><div class="row"><br></div></div>
+
+                                </div>
+                                <div class="container col-4">
+                                    <div class="row">
+                                    </div>
+                                </div>
+                                <div class="container col-4">
+                                    <div class="row">
+                                        <h4 class="">Equipment</h4>
+                                        <div class="navbar navbar-sm navbar-dark bg-dark">
+                                            <div class="input-group-prepend col">
+                                                <input id="addEquipment" type="text" class="form-control" name="addEquipment" aria-describedby="addEquipment" placeholder="Add Item">
+                                                <button type="button" class="btn btn-xs btn-dark" id="addEquipmentButton"><i class='material-icons'>add</i></button>
+                                            </div>
+                                        </div>
+                                        <ul class="list-group list-group-flush" id="equipment" name="equipment">
+                                        </ul>
+                                    </div>
+                                </div>
+                                <div class="container col-4">
+                                    <div class="row">
+                                    </div>
+                                </div>
+                                <div class="container"><div class="row"><br></div></div>
+                                <button type ="submit" class="btn btn-dark" value="Save Character">Save</button>
+                                <button type="button" class="btn btn-danger" value="Delete Character" data-toggle="modal" data-target="#deleteModal">Delete</button>
+                                <div id="saveModal" class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="saveNotification" aria-hidden="true">
+                                    <div class="modal-dialog modal-dialog-centered modal-sm">
+                                        <div class="modal-content">
+                                            <div class="modal-body">Your character has been saved!</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                    <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="deleteCharacterModalLabel" aria-hidden="true">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" >Delete</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    Are you sure you want to delete this character forever?
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    <form id="deleteCharacter" action="/deleteCharacter" method="delete">
+                                        <button type="submit" class="btn btn-danger" value="Delete Character">Yes, Delete</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+
+        <!-- <section id="top">
+<h3>POST Status Code Tests</h3>
+<form id="nameForm" action="/addCharacter" method="post">
+<label for="name">Name: </label>
+<input id="nameField" type="text" name="name" />
+<input type="submit" value="Add Character" />
+</form>
+<form id="characterForm" action="/getCharacterList" method="get">
+<select id='urlField'>
+<option value='/getCharacterList'>/getCharacterList</option>
+<option value='/notReal'>/notReal</option>
+</select>
+<select id="methodSelect">
+<option value="get">GET</option>
+<option value="head">HEAD</option>
+</select>
+<input type="submit" value="Get Character" />
+</form>
+</section>
+<section id="content">
+</section>-->
+
+
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    </body>
+</html>
