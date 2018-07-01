@@ -34,6 +34,7 @@ const handleSignup = (e) => {
 const LoginWindow = (props) => {
     return (
         <form id="loginForm" name="loginForm" onSubmit={handleLogin} action="/login" method="POST" className="mainForm" >
+        /*
         <div className="input-group">
         <div className="input-group-prepend col-3">
         <span className="input-group-text bg-secondary text-light w-100" id="username-addon">Username:</span>
@@ -50,7 +51,9 @@ const LoginWindow = (props) => {
         <input type="hidden" name="_csrf" value={props.csrf}/>
         <br/>
         <button className="formSubmit btn btn-success offset-md-10 col-2" type="submit" value="Sign in">Enter</button>
+        */
         </form>
+
     );
 };
 const SignupWindow = (props) => {
@@ -107,7 +110,7 @@ const createSignupWindow = (csrf) => {
 };
 
 const setup = (csrf) => {
-    const loginButton = document.querySelector("#loginButton");
+    /*const loginButton = document.querySelector("#loginButton");
     const signupButton = document.querySelector("#signupButton");
     signupButton.addEventListener("click", (e) => {
         e.preventDefault();
@@ -119,6 +122,7 @@ const setup = (csrf) => {
         createLoginWindow(csrf);
         return false;
     });
+    */
     createLoginWindow(csrf);
 };
 

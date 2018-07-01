@@ -37,6 +37,7 @@ var LoginWindow = function LoginWindow(props) {
     return React.createElement(
         "form",
         { id: "loginForm", name: "loginForm", onSubmit: handleLogin, action: "/login", method: "POST", className: "mainForm" },
+        "/*",
         React.createElement(
             "div",
             { className: "input-group" },
@@ -71,7 +72,8 @@ var LoginWindow = function LoginWindow(props) {
             "button",
             { className: "formSubmit btn btn-success offset-md-10 col-2", type: "submit", value: "Sign in" },
             "Enter"
-        )
+        ),
+        "*/"
     );
 };
 var SignupWindow = function SignupWindow(props) {
@@ -151,18 +153,19 @@ var createSignupWindow = function createSignupWindow(csrf) {
 };
 
 var setup = function setup(csrf) {
-    var loginButton = document.querySelector("#loginButton");
-    var signupButton = document.querySelector("#signupButton");
-    signupButton.addEventListener("click", function (e) {
+    /*const loginButton = document.querySelector("#loginButton");
+    const signupButton = document.querySelector("#signupButton");
+    signupButton.addEventListener("click", (e) => {
         e.preventDefault();
         createSignupWindow(csrf);
         return false;
     });
-    loginButton.addEventListener("click", function (e) {
+    loginButton.addEventListener("click", (e) => {
         e.preventDefault();
         createLoginWindow(csrf);
         return false;
     });
+    */
     createLoginWindow(csrf);
 };
 
