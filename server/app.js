@@ -17,7 +17,7 @@ const dbURL = process.env.MONGODB_URI || 'mongodb://localhost/portfolio';
 mongoose.connect(dbURL, (err) => {
   if (err) {
     console.log('could not connect to database');
-    //throw err;
+    throw err;
   }
 });
 
