@@ -9,6 +9,7 @@ const handlePassUpdate = (e) => {
         handleError("Current password cannot ");
         return false;
     }*/
+	
     if($("#newPass").val() =='' || $("#newPass2").val() == '') {
         handleError("both fields are required");
         return false
